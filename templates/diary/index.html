@@ -1,15 +1,30 @@
 {% extends "base/diary_base.html" %}
 {% block body %}
 
-<div id="clock"></div>
-<br />
-<a href="{% url 'diary:page_create' %}" class="button">日記を書く</a>
-<br>
-<a href="{% url 'diary:page_list' %}" class="button">ページ一覧</a>
-<br>
-<form action="{% url 'accounts:logout' %}" method="post">
-    {% csrf_token %}
-    <button type="submit">ログアウト</button>
-</form>
+<div class="max-w-lg mx-auto mt-16 p-8 bg-gradient-to-br from-white to-gray-100 rounded-3xl shadow-2xl space-y-8">
+
+    <div id="clock" class="text-3xl font-mono text-indigo-600 border-b pb-4 border-indigo-300"></div>
+
+    <div class="grid gap-4">
+        <a href="{% url 'diary:page_create' %}"
+           class="flex items-center justify-center gap-2 w-full bg-indigo-500 text-white font-semibold py-3 px-5 rounded-xl shadow-md hover:bg-indigo-600 transition-all duration-200">
+            ✍️ <span>日記を書く</span>
+        </a>
+
+        <a href="{% url 'diary:page_list' %}"
+           class="flex items-center justify-center gap-2 w-full bg-teal-500 text-white font-semibold py-3 px-5 rounded-xl shadow-md hover:bg-teal-600 transition-all duration-200">
+            📖 <span>ページ一覧</span>
+        </a>
+    </div>
+
+    <form action="{% url 'accounts:logout' %}" method="post" class="pt-6">
+        {% csrf_token %}
+        <button type="submit"
+                class="flex items-center justify-center gap-2 w-full bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg hover:bg-gray-300 transition">
+            🚪 <span>ログアウト</span>
+        </button>
+    </form>
+
+</div>
 
 {% endblock %}

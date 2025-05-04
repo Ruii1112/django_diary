@@ -1,16 +1,32 @@
 {% extends "base/diary_base.html" %}
 {% block body %}
 
-<form method="post">
-    {% csrf_token %}
-    <p>このページを削除しても良いですか？</p>
-    <button type="submit">削除</button>
-</form>
-<h2>{{ page.title }}</h2>
-<div>{{ page.page_date }}</div>
-<div>{{ page.body | linebreaksbr }}</div>
-{% if page.picture %}
-    <img src="{{ page.picture.url }}" />
-{% endif %}
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-6">
+    <h2 class="text-3xl font-semibold text-gray-800">{{ page.title }}</h2>
+    
+    <div class="text-sm text-gray-500 mb-4">
+        📅 {{ page.page_date }}
+    </div>
+
+    <div class="prose prose-indigo text-gray-700">
+        {{ page.body | linebreaksbr }}
+    </div>
+
+    {% if page.picture %}
+        <div class="mt-4">
+            <img src="{{ page.picture.url }}" class="w-full rounded-xl shadow-md" />
+        </div>
+    {% endif %}
+
+    <div class="mt-6">
+        <p class="text-xl text-red-600 font-semibold">このページを削除しても良いですか？</p>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            <button type="submit" class="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition">
+                削除
+            </button>
+        </form>
+    </div>
+</div>
 
 {% endblock %}

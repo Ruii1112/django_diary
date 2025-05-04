@@ -1,14 +1,35 @@
 {% extends "base/diary_base.html" %}
 {% block body %}
 
-<h2>{{ page.title }}</h2>
-<div>{{ page.page_date }}</div>
-<div>{{ page.body | linebreaksbr }}</div>
-{% if page.picture %}
-    <img src="{{ page.picture.url }}" />
-{% endif %}
-<br />
-<a href="{% url 'diary:page_update' page.id %}">編集</a>
-<a href="{% url 'diary:page_delete' page.id %}">削除</a>
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-6">
+
+    <h2 class="text-3xl font-semibold text-gray-800">{{ page.title }}</h2>
+
+    <div class="text-sm text-gray-500 mb-4">
+        📅 {{ page.page_date }}
+    </div>
+
+    <div class="prose prose-indigo text-gray-700">
+        {{ page.body | linebreaksbr }}
+    </div>
+
+    {% if page.picture %}
+        <div class="mt-4">
+            <img src="{{ page.picture.url }}" class="w-full rounded-xl shadow-md" />
+        </div>
+    {% endif %}
+
+    <div class="space-x-4 mt-6">
+        <a href="{% url 'diary:page_update' page.id %}" 
+           class="inline-block bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+            編集
+        </a>
+        <a href="{% url 'diary:page_delete' page.id %}" 
+           class="inline-block bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition">
+            削除
+        </a>
+    </div>
+
+</div>
 
 {% endblock %}

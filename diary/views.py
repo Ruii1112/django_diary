@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
+from pathlib import Path
 from .forms import PageForm
 from .models import Page
 from datetime import datetime
@@ -43,8 +44,13 @@ class PageUpdateView(LoginRequiredMixin, View):
     
     def post(self, request, id):
         page = get_object_or_404(Page, id=id)
+        old_picture = page.picture
+
         form = PageForm(request.POST, request.FILES, instance=page)
         if form.is_valid():
+            new_picture = request.FILES.get("picture")
+            if new_picture and old_picture and old_picture != new_picture:
+                Path(old_picture.path).unlink(missing_ok=True)
             form.save()
             return redirect("diary:page_detail", id=id)
         return render(request, "diary/page_update.html", {"form": form})

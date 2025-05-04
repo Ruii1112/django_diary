@@ -5,11 +5,25 @@
         <title>日記</title>
         {% load static %}
         <link rel="stylesheet" href="{% static 'diary/css/base.css' %}">
-        <script src="{% static 'diary/js/base.js' %}"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body>
-        <h1><a href="{% url 'diary:index' %}">日記</a></h1>
-        {% block body %}
-        {% endblock %}
+    <body class="bg-gray-100 min-h-screen text-gray-900">
+
+        <header class="bg-white shadow-md py-4 px-6 mb-6">
+            <h1 class="text-2xl font-bold text-blue-600">
+                <a href="{% url 'diary:index' %}" class="hover:underline">📘 日記</a>
+            </h1>
+        </header>
+
+        <main class="container mx-auto px-4">
+            {% block body %}
+            {% endblock %}
+        </main>
+
+        <footer class="text-center text-sm text-gray-500 py-6">
+            &copy; 2025 My Diary App
+        </footer>
+        
+        <script src="{% static 'diary/js/base.js' %}"></script>
     </body>
 </html>

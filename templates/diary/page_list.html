@@ -1,14 +1,27 @@
 {% extends "base/diary_base.html" %}
 {% block body %}
 
-<ul>
-    {% for page in page_list %}
-        <li>{{ page.page_date }}: 
-            <a href="{% url 'diary:page_detail' page.id %}">{{ page.title }}</a>
-        </li>
-    {% empty %}
-        <div>日記のページが1つもありません。</div>
-    {% endfor %}
-</ul>
+<div class="max-w-3xl mx-auto p-6 space-y-4">
+
+    {% if page_list %}
+        <ul class="space-y-4">
+            {% for page in page_list %}
+                <li class="bg-white p-4 rounded-xl shadow hover:shadow-md transition">
+                    <p class="text-sm text-gray-500 mb-1">📅 {{ page.page_date }}</p>
+                    <a href="{% url 'diary:page_detail' page.id %}"
+                       class="text-lg text-indigo-600 font-semibold hover:underline">
+                        {{ page.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="text-center text-gray-500 p-10 bg-white rounded-xl shadow">
+            <p class="text-2xl mb-2">😢</p>
+            <p>日記のページが1つもありません。</p>
+        </div>
+    {% endif %}
+
+</div>
 
 {% endblock %}

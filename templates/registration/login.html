@@ -1,11 +1,26 @@
 {% extends "base/diary_base.html" %}
 {% block body %}
 
-<h2>ログイン</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">ログイン</button>
-</form>
+<div class="max-w-md mx-auto bg-white p-6 rounded-2xl shadow-lg">
+    <h2 class="text-xl font-semibold text-center text-blue-600 mb-6">ログイン</h2>
+
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+    
+        <div>
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </div>
+    
+        <div>
+            {{ form.password.label_tag }}
+            {{ form.password }}
+        </div>
+    
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+            ログイン
+        </button>
+    </form>
+</div>
 
 {% endblock %}
