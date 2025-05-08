@@ -9,10 +9,21 @@
     </head>
     <body class="bg-gray-100 min-h-screen text-gray-900">
 
-        <header class="bg-white shadow-md py-4 px-6 mb-6">
+        <header class="bg-white shadow-md py-4 px-6 mb-6 flex justify-between items-center">
             <h1 class="text-2xl font-bold text-blue-600">
                 <a href="{% url 'diary:index' %}" class="hover:underline">📘 日記</a>
             </h1>
+            <div class="flex space-x-4">
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'accounts:logout' %}" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="text-sm text-red-500 hover:underline">ログアウト</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'accounts:signup' %}" class="text-sm text-blue-500 hover:underline">サインアップ</a>
+                    <a href="{% url 'accounts:login' %}" class="ml-4 text-sm text-blue-500 hover:underline">ログイン</a>
+                {% endif %}
+            </div>
         </header>
 
         <main class="container mx-auto px-4">

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "diary.apps.DiaryConfig",
+    "accounts",
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,5 @@ LOGOUT_REDIRECT_URL = "/login/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
